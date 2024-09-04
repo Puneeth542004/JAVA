@@ -1,0 +1,19 @@
+import java.util.Arrays;
+import java.util.Scanner;
+public class MaxMinFinder {
+    public static void main(String[] args) 
+    {
+        int[] array = {14, 16, 87, 36, 25, 89, 34};
+        int M = 1;
+        int N = 3;
+        Arrays.sort(array);
+        int mthMaximum = array[array.length - M];
+        int nthMinimum = array[N - 1];
+        int sum = mthMaximum + nthMinimum;
+        int difference = mthMaximum - nthMinimum;
+        System.out.println(M + "th Maximum Number = " + mthMaximum);
+        System.out.println(N + "th Minimum Number = " + nthMinimum);
+        System.out.println("Sum = " + sum);
+        System.out.println("Difference = " + difference);
+    }
+}
