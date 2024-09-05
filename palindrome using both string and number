@@ -1,0 +1,63 @@
+class StringPalindromeChecker implements Runnable {
+    private String inputString;
+    public StringPalindromeChecker(String inputString) {
+        this.inputString = inputString;
+    }
+    @Override
+    public void run() {
+        if (isPalindrome(inputString)) {
+            System.out.println("String '" + inputString + "' is a Palindrome");
+        } else {
+            System.out.println("String '" + inputString + "' is not a Palindrome");
+        }
+    }
+    public boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+class NumberPalindromeChecker implements Runnable {
+    private int inputNumber;
+    public NumberPalindromeChecker(int inputNumber) {
+        this.inputNumber = inputNumber;
+    }
+    @Override
+    public void run() {
+        String numberString = Integer.toString(inputNumber);
+        if (isPalindrome(numberString)) {
+            System.out.println("Number " + inputNumber + " is a Palindrome");
+        } else {
+            System.out.println("Number " + inputNumber + " is not a Palindrome");
+        }
+    }
+    public boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+public class PalindromeCheckerWithThreads {
+    public static void main(String[] args) {
+        String inputString = "MADAM";
+        int inputNumber = 121;
+        Thread stringThread = new Thread(new StringPalindromeChecker(inputString));
+        Thread numberThread = new Thread(new NumberPalindromeChecker(inputNumber));
+        stringThread.start();
+        numberThread.start();
+    }
+}
