@@ -1,0 +1,51 @@
+// Thread class for multiplication table
+class MultiplicationTableThread extends Thread {
+    private int number;
+
+    // Constructor to initialize the number for which the multiplication table is needed
+    public MultiplicationTableThread(int number) {
+        this.number = number;
+    }
+
+    // Override the run method to display the multiplication table
+    @Override
+    public void run() {
+        System.out.println("Thread " + number + " is in RUNNING state.");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(number + " X " + i + " = " + (number * i));
+        }
+        System.out.println("Thread " + number + " is TERMINATED.\n");
+    }
+}
+
+// Main class to demonstrate thread life cycle
+public class Main {
+    public static void main(String[] args) {
+        // Creating threads for numbers 5 and 10
+        MultiplicationTableThread thread1 = new MultiplicationTableThread(5);
+        MultiplicationTableThread thread2 = new MultiplicationTableThread(10);
+        
+        // Displaying thread state after creation
+        System.out.println("Thread " + thread1.getName() + " for number 5 is in NEW state.");
+        System.out.println("Thread " + thread2.getName() + " for number 10 is in NEW state.");
+        
+        // Starting the threads
+        thread1.start();
+        thread2.start();
+        
+        // Displaying thread state after starting
+        System.out.println("Thread " + thread1.getName() + " for number 5 is in RUNNABLE state.");
+        System.out.println("Thread " + thread2.getName() + " for number 10 is in RUNNABLE state.");
+        
+        // Joining the threads to wait for their completion
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted.");
+        }
+        
+        // After threads finish execution, they enter the terminated state
+        System.out.println("Both threads have completed execution.");
+    }
+}
